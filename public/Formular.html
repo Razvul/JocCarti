@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular</title>
+    <link rel="stylesheet" href="Formular.css">
+</head>
+<body>
+    <form>
+        <div>
+            <label for="nume">Nume</label>
+            <input type="text" name="nume" id="nume" placeholder="Nume" required>
+        </div>
+        <div>
+            <label for="parola">Parola</label>
+            <input type="password" name="parola" id="parola" placeholder="Parola" required>
+        </div>
+        <div>
+            Gen:
+            <div>
+                <label for="masculin">Masculin</label>
+                <input type="radio" name="gen" id="masculin" value="masculin" checked>
+            </div>
+            <div>
+                <label for="faminin">Feminin</label>
+                <input type="radio" name="gen" id="faminin" value="faminin">
+            </div>
+        </div>
+        <div>
+            <label for="varsta">Varsta</label>
+            <input type="number" name="varsta" id="varsta" min="18" max="99">
+        </div>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
+    <button onclick="location.href='./index.html'">Joaca Razboi</button>
+    <button onclick="location.href='./index2.html'">Joaca Macaua</button>
+    
+</body>
+</html>

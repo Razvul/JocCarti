@@ -1,0 +1,9 @@
+body{
+    background-color: goldenrod;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+}
+*{
+    padding: 5px;
+}
