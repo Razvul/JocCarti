@@ -7,3 +7,6 @@ body{
 *{
     padding: 5px;
 }
+.error{
+    background-color: red;
+}

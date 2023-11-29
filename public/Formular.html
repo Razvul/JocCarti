@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formular</title>
     <link rel="stylesheet" href="Formular.css">
+    <script src="Formular.js" defer></script>
 </head>
 <body>
     <form>
@@ -21,7 +22,7 @@
             Gen:
             <div>
                 <label for="masculin">Masculin</label>
-                <input type="radio" name="gen" id="masculin" value="masculin" checked>
+                <input type="radio" name="gen" id="masculin" value="masculin">
             </div>
             <div>
                 <label for="faminin">Feminin</label>
@@ -31,6 +32,10 @@
         <div>
             <label for="varsta">Varsta</label>
             <input type="number" name="varsta" id="varsta" min="18" max="99">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
         </div>
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
