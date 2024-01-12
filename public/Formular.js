@@ -3,7 +3,7 @@ const inputParola = document.querySelector('#parola')
 const inputGen = document.getElementsByName('gen')
 const inputVarsta = document.querySelector('[type="number"]')
 const butonSubmit = document.querySelector('[type="submit"]')
-const butonEmail = document.querySelector('[type="email"]')
+const inputEmail = document.querySelector('[type="email"]')
 
 const infoUser = {}
 
@@ -81,7 +81,7 @@ function verificaUserEmail(email) {
             return elem === '.'
         })
 
-        if (indexPunct - indexArond > 0) {
+        if (indexPunct - indexArond > 1) {
             rezultat += 'Adresa de email este corecta. '
         }
         else {
@@ -110,7 +110,7 @@ inputGen.forEach(el => {
 inputVarsta.addEventListener('input', (e) => {
     infoUser.varsta = e.target.value
 })
-butonEmail.addEventListener('input', (e) => {
+inputEmail.addEventListener('input', (e) => {
     infoUser.email = e.target.value
 })
 

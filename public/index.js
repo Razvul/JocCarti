@@ -32,7 +32,7 @@ function creazaCarte(simbol, numar) {
             const carte = document.createElement('div')
             carte.classList.add('carte')
             carte.setAttribute('draggable', true)
-            // carte.setAttribute('ondragstart', drag(event))
+            carte.setAttribute('ondragstart', drag)
 
             const p = document.createElement('p')
             p.textContent = num
@@ -42,7 +42,7 @@ function creazaCarte(simbol, numar) {
             carte.appendChild(p)
             setComplet.appendChild(carte)
         })
-    });
+    })
 }
 
 creazaCarte(listaSimbolCarti, listaNumarCarti)
@@ -53,11 +53,11 @@ function allowDrop(ev) {
     ev.preventDefault() // ci-i asta?
 }
 function drag(ev) { // type = text, value = id
-    ev.dataTransfer.setData("text", ev.target.id) // ci-i asta? sets the data type and the value of the dragged data
-}//
+    ev.dataTransfer.setData("carte", ev.target.classList) // ci-i asta? sets the data type and the value of the dragged data
+}// cartile nu ai un id unic, o fi din cauza asta?
 function drop(ev) {
     ev.preventDefault()//CAUTA
-    var data = ev.dataTransfer.getData("text") //obtine id-ul elementului folosit ca argument/target?  CAUTA
+    var data = ev.dataTransfer.getData("carte") //obtine id-ul elementului folosit ca argument/target?  CAUTA
     ev.target.appendChild(document.getElementById(data)) // foloseste id-ul elementului tinta? CAUTA
 }
 //document.getElementById("cimitir").appendChild(document.getElementById("a-inima"))
@@ -172,52 +172,66 @@ let draws = 0
 let suma1 = 0
 let suma2 = 0
 
+function numarCarte(numar) {
+    let result = ''
+    switch (numar.toLowerCase()) {
+        case 'a': result = 1; break
+        case 'j': result = 11; break
+        case 'q': result = 12; break
+        case 'k': result = 13; break
+        default: result = numar
+    }
+    return result
+}
 
 function comparaCarti() {
     if (table1.childElementCount === 0 || table2.childElementCount === 0) return
 
     else {
-        const player1CurrentHand = table1.children[0]
-        const player2CurrentHand = table2.children[0]
+        const player1Card = table1.children[0]
+        const player2Card = table2.children[0]
 
-        if (+player1CurrentHand.dataset.number > +player2CurrentHand.dataset.number) {
-            player1.children[3].appendChild(player1CurrentHand) // winner card
-            cimitir.appendChild(player2CurrentHand) // loser card
+        const player1CardNumber = parseInt(numarCarte(player1Card.children[1].textContent))
+        const player2CardNumber = parseInt(numarCarte(player2Card.children[1].textContent))
+
+        if (player1CardNumber > player2CardNumber) {
+            player1.children[3].appendChild(player1Card) // winner card
+            cimitir.appendChild(player2Card) // loser card
 
             scor1++
             scorPlayer1.textContent = scor1
 
-            suma1 += Number(player1CurrentHand.dataset.number)
+            suma1 += player1CardNumber
             player1Sum.textContent = `Suma totala este ${suma1}`
 
         }
-        else if (+player1CurrentHand.dataset.number < +player2CurrentHand.dataset.number) {
-            player2.children[3].appendChild(player2CurrentHand)
-            cimitir.appendChild(player1CurrentHand)
+        else if (player1CardNumber < player2CardNumber) {
+            player2.children[3].appendChild(player2Card)
+            cimitir.appendChild(player1Card)
 
             scor2++
             scorPlayer2.textContent = scor2
 
-            suma2 += Number(player2CurrentHand.dataset.number)
+            suma2 += player2CardNumber
             player2Sum.textContent = `Suma totala este ${suma2}`
         }
         else {
-            cimitir.appendChild(player1CurrentHand)
-            cimitir.appendChild(player2CurrentHand)
+            cimitir.appendChild(player1Card)
+            cimitir.appendChild(player2Card)
             draws++
         }
 
         if (setComplet.childElementCount === 0 && player1Hand.childElementCount === 0 && player2Hand.childElementCount === 0) {
             if (scor1 > scor2) {
-                finalScore.textContent = `Player 1 is the winner with ${scor1} points!`
+                finalScore.textContent = `Jucatorul 1 a castigat cu ${scor1} de puncte!`
             }
             else if (scor1 < scor2) {
-                finalScore.textContent = `Player 2 is the winner with ${scor2} points!`
+                finalScore.textContent = `Jucatorul 2 a castigat cu ${scor2} de puncte!`
             }
             else {
-                finalScore.textContent = "We have a draw!"
+                finalScore.textContent = "Avem remiza!"
             }
-            drawCount.textContent = `Number of draws: ${draws}.`
+            drawCount.textContent = `Numar egaluri: ${draws}.`
         }
     }
 }
